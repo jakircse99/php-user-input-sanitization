@@ -1,3 +1,30 @@
+
+<?php
+   
+    /*
+    * Title: PHP User input sanitization
+    * Descripttion: In this project working with php user sanitization and retain the submited data.
+    * Author: Jakir hossain
+    * Website: jakircse.com
+    * Date: 01/11/2022
+    * 
+    */
+
+    $fname = '';
+    $lname = '';
+    $email = '';
+    $phone = '';
+
+    if(isset($_REQUEST['fname']) && isset($_REQUEST['lname']) && isset($_REQUEST['email']) && isset($_REQUEST['phone'])) {
+        $fname = filter_input(INPUT_POST, 'fname', FILTER_SANITIZE_SPECIAL_CHARS);
+        $lname = filter_input(INPUT_POST, 'lname', FILTER_SANITIZE_SPECIAL_CHARS);
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_SPECIAL_CHARS);
+        $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_SPECIAL_CHARS);
+        
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,12 +48,10 @@
         <div class="row">
             <div class="column column-50 column-offset-20">
                 
-                <p>
-                    First name:
-                    Last name:
-                    Email:
-                    Phone:
-                </p>
+                <blockquote>First name: <?php echo $fname ?></blockquote>
+                <blockquote>Last name: <?php echo $lname ?></blockquote>
+                <blockquote>Email: <?php echo $email ?></blockquote>
+                <blockquote>Phone: <?php echo $phone?></blockquote>
             </div>
         </div>
         <!-- result section end -->
@@ -34,7 +59,7 @@
         <!-- form section start -->
         <div class="row">
             <div class="column column-50 column-offset-20">
-                <form action="" method="POST">
+                <form action="index.php" method="POST">
                     <label for="fname">First name</label>
                     <input type="text" name="fname" id="fname">
                     <label for="lname">Last name</label>
